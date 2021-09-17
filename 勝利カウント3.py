@@ -29,15 +29,11 @@ def func1():
         return
     elif player in member:
         num = member.index(player)
-        now_win = member_win[num]
-        now_lose = member_lose[num]
     else:
         member.append(player)
         member_win.append(0)
         member_lose.append(0)
         num = member.index(player)
-        now_win = member_win[num]
-        now_lose = member_lose[num]
     Entry2.configure(state="normal")
     Entry3.configure(state="normal")
     Entry4.configure(state="normal")
@@ -46,8 +42,8 @@ def func1():
     Entry3.delete(0, tkinter.END)
     Entry4.delete(0, tkinter.END)
     Entry5.delete(0, tkinter.END)
-    Entry2.insert(tkinter.END, now_win)
-    Entry3.insert(tkinter.END, now_lose)
+    Entry2.insert(tkinter.END, member_win[num])
+    Entry3.insert(tkinter.END, member_lose[num])
     Entry4.insert(tkinter.END, win)
     Entry5.insert(tkinter.END, lose)
     Entry2.configure(state="readonly")
@@ -66,13 +62,12 @@ def func2():
     else:    
         num = member.index(player)
         member_win[num] = member_win[num] + 1
-        now_win = member_win[num]
         win = win + 1
         Entry2.configure(state="normal")
         Entry4.configure(state="normal")
         Entry2.delete(0, tkinter.END)
         Entry4.delete(0, tkinter.END)
-        Entry2.insert(tkinter.END, now_win)
+        Entry2.insert(tkinter.END, member_win[num])
         Entry4.insert(tkinter.END, win)
         Entry2.configure(state="readonly")
         Entry4.configure(state="readonly")
@@ -88,13 +83,12 @@ def func3():
     else:
         num = member.index(player)
         member_lose[num] = member_lose[num] + 1
-        now_lose = member_lose[num]
         lose = lose + 1
         Entry3.configure(state="normal")
         Entry5.configure(state="normal")
         Entry3.delete(0, tkinter.END)
         Entry5.delete(0, tkinter.END)
-        Entry3.insert(tkinter.END, now_lose)
+        Entry3.insert(tkinter.END, member_lose[num])
         Entry5.insert(tkinter.END, lose)
         Entry3.configure(state="readonly")
         Entry5.configure(state="readonly")
@@ -109,6 +103,7 @@ def func4():
         f.write(str(win)+"\n")
         f.write(str(lose))
 
+# バックアップ読み取り
 def func5():
     global win
     global lose
@@ -196,20 +191,20 @@ Buttons.configure(bg="light steel blue")
 Buttons.protocol("WM_DELETE_WINDOW", end)
 
 # ボタンの作成と配置
-read_button1 = tkinter.Button(Buttons,text="名前を確定",command=func1,bg="lemon chiffon", font=("", "20"))
-read_button1.pack(padx=10, pady=10)
+button1 = tkinter.Button(Buttons,text="名前を確定",command=func1,bg="lemon chiffon", font=("", "20"))
+button1.pack(padx=10, pady=10)
 
-read_button2 = tkinter.Button(Buttons,text="勝ち",command=func2,bg="lemon chiffon", font=("", "20"))
-read_button2.place(x=24, y=80)
+button2 = tkinter.Button(Buttons,text="勝ち",command=func2,bg="lemon chiffon", font=("", "20"))
+button2.place(x=24, y=80)
 
-read_button3 = tkinter.Button(Buttons,text="負け",command=func3,bg="lemon chiffon", font=("", "20"))
-read_button3.place(x=101, y=80)
+button3 = tkinter.Button(Buttons,text="負け",command=func3,bg="lemon chiffon", font=("", "20"))
+button3.place(x=101, y=80)
 
-read_button4 = tkinter.Button(Buttons,text="保存",command=func4,bg="lemon chiffon", font=("", "20"))
-read_button4.place(x=22, y=180)
+button4 = tkinter.Button(Buttons,text="保存",command=func4,bg="lemon chiffon", font=("", "20"))
+button4.place(x=22, y=180)
 
-read_button5 = tkinter.Button(Buttons,text="復元",command=func5,bg="lemon chiffon", font=("", "20"))
-read_button5.place(x=101, y=180)
+button5 = tkinter.Button(Buttons,text="復元",command=func5,bg="lemon chiffon", font=("", "20"))
+button5.place(x=101, y=180)
 
 
 # GUIアプリ生成
